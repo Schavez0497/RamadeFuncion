@@ -1,3 +1,7 @@
+import Atm.funciones.Deposito;
+import Atm.funciones.Retiro;
+import Atm.funciones.TIPOMONEDA;
+
 import java.util.Scanner;
 
 public class Main {
@@ -10,54 +14,45 @@ public class Main {
     public static void opcionesATM() {
         int opcion = 0;
         int opcionMoneda = 0;
+        TIPOMONEDA tipomoneda = null;
 
         Scanner scanner = new Scanner(System.in);
         Scanner scannerString = new Scanner(System.in);
         Scanner scannerMoneda = new Scanner(System.in);
 
+        opcionMoneda();
+        opcionMoneda = scannerMoneda.nextInt();
+        if (opcionMoneda==1){
+            tipomoneda=TIPOMONEDA.DOLARES;
+        }
+        else {
+            tipomoneda=TIPOMONEDA.CORDOBAS;
+        }
         while(true) {
             mostrarMenu();
             opcion = scanner.nextInt();
-
             switch (opcion) {
                 case 1:
+                    Deposito deposito=new Deposito();
+                    System.out.println("Monto a depositar:");
+                    float monto=scanner.nextFloat();
+                    deposito.depositar(tipomoneda,monto);
 
-                    opcionMoneda();
-                    opcionMoneda = scannerMoneda.nextInt();
-                    switch (opcionMoneda) {
-                        case 1:
-                            System.out.println("Dólar");
-                            break;
-                        case 2:
-                            System.out.println("Cordóbas");
-                            opcionMoneda();
-                            break;
-                        default:
-                            break;
-                    }
                     break;
                 case 2:
-                    opcionMoneda();
-                    opcionMoneda = scannerMoneda.nextInt();
-                    switch (opcionMoneda) {
-                        case 1:
-                            System.out.println("Dólar");
-                            break;
-                        case 2:
-                            System.out.println("Cordóbas");
-                            opcionMoneda();
-                            break;
-                        default:
-                            break;
-                    }
+                    Retiro retiro=new Retiro();
+                    System.out.println("Monto a retirar:");
+                    monto=scanner.nextFloat();
+                    retiro.retirar(tipomoneda,monto);
                     break;
                 case 3:
-                    System.out.println("Ver Saldo");
+
+                    System.out.println("Consulta:");
+
                     break;
                 default:
                     break;
             }
-
 
             String salir = "";
 
@@ -86,8 +81,6 @@ public class Main {
         System.out.println("1) Dólar");
         System.out.println("2) Cordóba");
         System.out.println("**************************************************************");
-
-
 
 
     }
