@@ -1,3 +1,4 @@
+import Atm.funciones.Consulta;
 import Atm.funciones.Deposito;
 import Atm.funciones.Retiro;
 import Atm.funciones.TIPOMONEDA;
@@ -46,8 +47,9 @@ public class Main {
                     retiro.retirar(tipomoneda,monto);
                     break;
                 case 3:
-
+                    Consulta consulta=new Consulta();
                     System.out.println("Consulta:");
+                    consulta.consultar(tipomoneda);
 
                     break;
                 default:
