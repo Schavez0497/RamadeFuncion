@@ -7,7 +7,7 @@ public class Deposito {
         operaciones.guardarMonto(tipomoneda,cantidad);
         System.out.println("Deposito realizado con Exito");
         if (tipomoneda==TIPOMONEDA.DOLARES){
-            System.out.println("Saldo actual " + operaciones.getTodalDolares());
+            System.out.println("Saldo actual " + operaciones.getTotalDolares());
         }
         System.out.println("Saldo actual " + operaciones.getTotalCordobas());
         
