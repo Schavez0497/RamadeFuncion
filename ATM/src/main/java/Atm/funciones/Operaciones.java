@@ -1,10 +1,16 @@
 package Atm.funciones;
 
 public class Operaciones {
-    public float totalCordobas = 0;
-    public float totalDolares = 0;
+    private static Operaciones operaciones;
+    private float totalCordobas = 0;
+    private float totalDolares = 0;
 
-    public Operaciones() {
+    private Operaciones() {
+    }
+
+    public static Operaciones NewOperacion() {
+        if (operaciones == null) operaciones = new Operaciones();
+        return operaciones;
     }
 
     public float getTotalCordobas() {
@@ -16,20 +22,19 @@ public class Operaciones {
     }
 
     public void guardarMonto(TIPOMONEDA moneda, float monto) {
-        if (moneda == TIPOMONEDA.DOLARES) this.totalDolares += monto;
-        this.totalCordobas += monto;
+        if (moneda == TIPOMONEDA.DOLARES) {
+            this.totalDolares += monto;
+        } else {
+            this.totalCordobas += monto;
+        }
     }
 
     public void retirar(TIPOMONEDA tipomoneda, float monto) {
         if (compararMonto(monto, this.totalDolares)) {
             if (tipomoneda == TIPOMONEDA.DOLARES) {
-
                 this.totalDolares -= monto;
-                System.out.println("Se retiro:" + monto);
-                mostrarMensaje(tipomoneda);
             } else {
                 this.totalCordobas -= monto;
-                mostrarMensaje(tipomoneda);
             }
 
         } else {
@@ -40,9 +45,9 @@ public class Operaciones {
 
     public String consultarSaldo(TIPOMONEDA tipomoneda) {
         if (tipomoneda == TIPOMONEDA.DOLARES) {
-            return TIPOMONEDA.DOLARES.getMoneda() + getTotalDolares();
+            return "Saldo actual: " + TIPOMONEDA.DOLARES.getMoneda() + " " + getTotalDolares();
         }
-        return TIPOMONEDA.CORDOBAS.getMoneda() + getTotalCordobas();
+        return "Saldo actual: " + TIPOMONEDA.CORDOBAS.getMoneda() + " " + getTotalCordobas();
     }
 
     private boolean compararMonto(float monto, float total) {
@@ -54,9 +59,9 @@ public class Operaciones {
 
     private void mostrarMensaje(TIPOMONEDA tipomoneda) {
         if (tipomoneda == TIPOMONEDA.DOLARES) {
-            System.out.println("Saldo actual:" + getTotalDolares() + TIPOMONEDA.DOLARES);
+            System.out.println("Saldo actual: " + TIPOMONEDA.DOLARES.getMoneda() + " " + getTotalDolares());
         } else {
-            System.out.println("Saldo actual:" + getTotalCordobas() + TIPOMONEDA.CORDOBAS);
+            System.out.println("Saldo actual: " + TIPOMONEDA.CORDOBAS.getMoneda()  + " "  + getTotalCordobas());
         }
     }
 }
