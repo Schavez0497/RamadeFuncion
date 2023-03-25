@@ -1,8 +1,8 @@
 package Atm.funciones;
 
 public class Operaciones {
-    private float totalCordobas;
-    private float totalDolares;
+    public float totalCordobas = 0;
+    public float totalDolares = 0;
 
     public Operaciones() {
     }
@@ -17,22 +17,22 @@ public class Operaciones {
 
     public void guardarMonto(TIPOMONEDA moneda, float monto) {
         if (moneda == TIPOMONEDA.DOLARES) this.totalDolares += monto;
-        totalCordobas += monto;
+        this.totalCordobas += monto;
     }
 
     public void retirar(TIPOMONEDA tipomoneda, float monto) {
-        if (compararMonto(monto, totalDolares)) {
+        if (compararMonto(monto, this.totalDolares)) {
             if (tipomoneda == TIPOMONEDA.DOLARES) {
 
-                totalDolares -= monto;
+                this.totalDolares -= monto;
                 System.out.println("Se retiro:" + monto);
                 mostrarMensaje(tipomoneda);
-            }else {
-                totalCordobas-=monto;
+            } else {
+                this.totalCordobas -= monto;
                 mostrarMensaje(tipomoneda);
             }
 
-        }else {
+        } else {
             System.out.println("Monto a retirar invalido");
         }
 
@@ -52,10 +52,10 @@ public class Operaciones {
         return true;
     }
 
-    private void mostrarMensaje(TIPOMONEDA tipomoneda){
-        if (tipomoneda==TIPOMONEDA.DOLARES){
+    private void mostrarMensaje(TIPOMONEDA tipomoneda) {
+        if (tipomoneda == TIPOMONEDA.DOLARES) {
             System.out.println("Saldo actual:" + getTotalDolares() + TIPOMONEDA.DOLARES);
-        }else {
+        } else {
             System.out.println("Saldo actual:" + getTotalCordobas() + TIPOMONEDA.CORDOBAS);
         }
     }
